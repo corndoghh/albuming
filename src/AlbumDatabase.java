@@ -19,30 +19,28 @@ public class AlbumDatabase {
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                // System.out.println(data);
-                String splitter = "[:\\::\\-]";
-                String[] splitData = data.split(splitter);
-                String splitter2 = "[()\\:]";
-                String[] splitData2 = data.split(splitter2);
 
-                // if (splitData[0] != "0") {
-                //     System.out.println("This is a album line, name: " + splitData[0]);
-                // } else {
-                //     System.out.println("its a song");
-                // }
+                String[] splitData = data.split("[:\\::\\-]");
 
                 try {
                     Integer.parseInt(splitData[0]);
-                    Duration duration = new Duration(data.split(" ")[0]);
-                    System.out.println(Arrays.toString(duration.getDuration()));
+
+                    Track track = new Track(data.split("-")[1], data.split(" ")[0]);
+                    System.out.println(Arrays.toString(track.getDuration()) + " : " + track.getTitle());
 
 
 
-                } catch (Exception e) {
+                } catch (Exception e) {      
+                    
+
+                    String[] splitData2 = data.split("[()\\:]");
+
                     String artist = splitData[0];
                     String title = splitData2[1];
                     String year = splitData2[2];
-                    System.out.println("This is the artist: " + artist + ", and this is the album title: " + title + "and this is the year: " + year);
+
+                    
+                    // System.out.println("This is the artist: " + artist + ", and this is the album title: " + title + "and this is the year: " + year);
 
                 }
             }
